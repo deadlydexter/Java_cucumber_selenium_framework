@@ -1,17 +1,26 @@
 package cucumber;
 
+import enums.Context;
+import io.cucumber.java.Scenario;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import enums.Context;
 
 public class ScenarioContext {
 //This is a HasMap object which store the information in the Key-Value pair. Key type is String and Value can be of any Object Type.
 	private Map<String, Object> scenarioContext;
+	public static Scenario scenario;
 	
 	public ScenarioContext() {
 		scenarioContext = new HashMap<>();
 	}
+	public static Scenario getScenario() {
+		return scenario;
+	}
+	public static void setScenario(Scenario scenario) {
+		ScenarioContext.scenario = scenario;
+	}
+
 	//This method takes two parameters,  key as String and value as object. Key is nothing but a Context enum.
 	public void setContext(Context key, Object value) {
 		scenarioContext.put(key.toString(), value);
