@@ -44,7 +44,7 @@ public class Hooks extends BasePage {
 		ScenarioContext.setScenario(scenario);
 
 		testContext.getDriverManager().getDriver();
-		ExtentSparkReporter htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir")+ "/test-output/ExtentReports/CCGB-CustomExtentReport"+timestamp()+".html");
+		ExtentSparkReporter htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir")+ "/test-output/ExtentReports/Test-CustomExtentReport"+timestamp()+".html");
 		extent = new ExtentReports();
 		final File CONF = new File("configs/spark-config.xml");
 		htmlReporter.loadXMLConfig(CONF);
@@ -56,7 +56,7 @@ public class Hooks extends BasePage {
 
 
 	@After("@UI")
-	public void tearDownUITests(Scenario scenario) throws IOException {
+	public void tearDownUITests(Scenario scenario) {
 		LogFile.endTestCase(scenario.getName());
 		WebDriver driver = testContext.getDriverManager().getDriver();
 		if(scenario.isFailed()) try {

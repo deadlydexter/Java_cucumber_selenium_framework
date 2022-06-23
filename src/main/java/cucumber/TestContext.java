@@ -5,7 +5,7 @@ import managers.PageObjectManager;
 
 public class TestContext {
 
-	private DriverManager drivermanager;
+	private final DriverManager drivermanager;
 	private PageObjectManager pageObjectManager;
 	public ScenarioContext scenarioContext;
 	

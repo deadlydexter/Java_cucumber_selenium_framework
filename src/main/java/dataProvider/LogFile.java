@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 import java.lang.invoke.MethodHandles;
 
 public class LogFile {
-    public static final Logger Log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass().getSimpleName());
+    private static final Logger Log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass().getSimpleName());
+
+//    private static final Logger Log = LoggerFactory.getLogger(LogFile.class);
 
     public static void startTestCase(String sTestCaseName) {
 
