@@ -1,12 +1,12 @@
 Feature: Test Tagged Hooks
  
-@First @NON-UI
+@First
 Scenario: This is First Scenario
 	Given this is the first step
 	When this is the second step
 	Then this is the third step
  
-@Second	@NON-UI
+@Second @NON-UI
 Scenario: This is Second Scenario non-ui
 	Given this is the first step one
 	When this is the second step two
