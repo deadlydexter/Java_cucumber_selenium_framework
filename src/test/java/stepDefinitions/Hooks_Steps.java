@@ -21,12 +21,13 @@ public class Hooks_Steps {
 
 	public Hooks_Steps(TestContext context){ testContext = context;}
 	@Given("^this is the first step$")
-	public void This_Is_The_First_Step(){
+	public void This_Is_The_First_Step() throws InterruptedException {
 		System.out.println("This is the first step");
 		homePage = testContext.getPageObjectManager().getHomePage();
 		homePage.navigateTo_HomePage();
 		ExtentTestManager.startTestByName(scenario_name);
 		ExtentTestManager.getTestByName(scenario_name).info("Navigating to loginPage");
+		Thread.sleep(3000);
 	}
 
 	@When("^this is the second step$")
