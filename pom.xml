@@ -143,7 +143,6 @@
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
-						<executable>C:\Program Files (x86)\Java\jdk1.8.0_161\bin\javac</executable>
 					</configuration>
 					<executions>
 						<execution>
