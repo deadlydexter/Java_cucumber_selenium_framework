@@ -3,9 +3,11 @@ version: 0.2
 phases:
   install:
     commands:
-      - curl https://intoli.com/install-google-chrome.sh | bash
-      - mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
-      -  google-chrome --version && which google-chrome
+      - sudo apt update
+      - sudo apt upgrade
+      - sudo apt install wget
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - sudo dpkg -i google-chrome-stable_current_amd64.deb
 
   build:
     commands:
