@@ -54,7 +54,7 @@ public class DriverManager {
                 driver = new ChromeDriver(options);
 
                 break;
-            case FIREFOX:
+            case CHROME_HEADLESS:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions optionz = new ChromeOptions();
                 optionz.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
