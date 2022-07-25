@@ -3,9 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - apt update
-      - apt upgrade
-      - apt install wget
+      - yum install wget
       - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       - dpkg -i google-chrome-stable_current_amd64.deb
 
