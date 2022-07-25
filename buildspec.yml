@@ -3,6 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
+      - sudo yum install apt
       - sudo apt install chromium-chromedriver -y
 
   build:
