@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 		features = "src/test/resources",
 		glue = "stepDefinitions",
-		tags = "@Third",
+		tags = "@NON-UI",
 		monochrome = true,
 		plugin =  { "html:target/cucumber-html-report/report.html"},publish = true )
 public class TestRunner_Smokes {
