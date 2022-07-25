@@ -7,7 +7,6 @@ phases:
       - wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
       - yum install ./google-chrome-stable_current_x86_64.rpm
       - ln -s /usr/bin/google-chrome-stable /usr/bin/chromium
-
   build:
     commands:
       - mvn clean package
