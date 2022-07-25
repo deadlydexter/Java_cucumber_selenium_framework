@@ -3,8 +3,9 @@ version: 0.2
 phases:
   install:
     commands:
-      - sudo yum install apt
-      - sudo apt install chromium-chromedriver -y
+      - sudo yum install apt-get
+      - sudo apt-get install --reinstall systemd
+      - google-chrome --version
 
   build:
     commands:
