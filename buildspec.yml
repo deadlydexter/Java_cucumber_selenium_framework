@@ -3,8 +3,10 @@ version: 0.2
 phases:
   install:
     commands:
-      - wget http://people.centos.org/hughesjr/chromium/6/chromium-el6.repo
-      - yum install -y chromium
+      - cd /tmp
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+      - sudo yum install ./google-chrome-stable_current_x86_64.rpm
+      - sudo ln -s /usr/bin/google-chrome-stable /usr/bin/chromium
 
   build:
     commands:
