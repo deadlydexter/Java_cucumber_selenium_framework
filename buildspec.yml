@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - yum install wget
+      - wget http://people.centos.org/hughesjr/chromium/6/chromium-el6.repo
       - yum install -y chromium
 
   build:
