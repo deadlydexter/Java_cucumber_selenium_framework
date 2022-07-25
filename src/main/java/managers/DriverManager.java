@@ -6,10 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-
-import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
 
@@ -52,21 +49,22 @@ public class DriverManager {
                 System.setProperty(CHROME_DRIVER_PROPERTY, FileReaderManager.getInstance().getConfigFileReader().getDriverPath());
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--incognito");
-
+                options.addArguments("--headless");
+                options.addArguments("--disable-gpu");
                 driver = new ChromeDriver(options);
 
                 break;
             case FIREFOX:
-                driver = new FirefoxDriver();
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions optionz = new ChromeOptions();
+                optionz.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
+                driver = new ChromeDriver(optionz);
                 break;
             case INTERNETEXPLORER:
                 driver = new InternetExplorerDriver();
                 break;
         }
-        if (FileReaderManager.getInstance().getConfigFileReader().getBrowserWindowSize())
-            driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(FileReaderManager.getInstance().getConfigFileReader().getImplicitlyWait(), TimeUnit.SECONDS);
+
         return driver;
     }
 
