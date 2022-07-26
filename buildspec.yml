@@ -15,3 +15,8 @@ phases:
   build:
     commands:
       - mvn clean package
+reports:
+  Selenium:
+    file-format: CucumberJson
+    files:
+      - target/cucumber-reports/Cucumber.json

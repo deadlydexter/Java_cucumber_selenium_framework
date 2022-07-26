@@ -11,7 +11,9 @@ import org.junit.runner.RunWith;
 		glue = "stepDefinitions",
 		tags = "@Third",
 		monochrome = true,
-		plugin =  { "html:target/cucumber-html-report/report.html"},publish = true )
+		plugin =  {
+//				"html:target/cucumber-html-report/report.html"
+				"json:target/cucumber-reports/Cucumber.json"},publish = true )
 public class TestRunner_Smokes {
 
 	@AfterClass
