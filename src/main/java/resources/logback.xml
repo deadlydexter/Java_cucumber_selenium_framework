@@ -25,5 +25,6 @@
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ROLLING"/>
     </root>
-
+    <logger name="org.apache" level="WARN" />
+    <logger name="httpclient" level="WARN" />
 </configuration>

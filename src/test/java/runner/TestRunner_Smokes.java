@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 		tags = "@Third",
 		monochrome = true,
 		plugin =  {
-				"html:target/cucumber-html-report/report.html"
-//				"json:target/cucumber-reports/Cucumber.json"
+//				"html:target/cucumber-html-report/report.html"
+				"json:target/cucumber-reports/Cucumber.json"
 		},publish = true )
 public class TestRunner_Smokes {
 

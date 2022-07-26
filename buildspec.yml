@@ -17,6 +17,6 @@ phases:
       - mvn clean package
 reports:
   Selenium:
-    file-format: html
+    file-format: CucumberJson
     files:
-      - target/cucumber-html-report/report.html
+      - target/cucumber-reports/Cucumber.json
