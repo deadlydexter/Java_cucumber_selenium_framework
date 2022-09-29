@@ -6,7 +6,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
 
 public class DriverManager {
 
@@ -46,11 +51,20 @@ public class DriverManager {
     private WebDriver createLocalDriver() {
         switch (driverType) {
             case CHROME:
+                System.setProperty("webdriver.chrome.silentOutput", "true");
+                java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
                 System.setProperty(CHROME_DRIVER_PROPERTY, FileReaderManager.getInstance().getConfigFileReader().getDriverPath());
                 WebDriverManager.chromedriver().setup();
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("download.default.directory", System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"+ File.separator +"resources"+File.separator +"functionalTests");
                 ChromeOptions options = new ChromeOptions();
+                options.setExperimentalOption("prefs",prefs);
+                options.setAcceptInsecureCerts(true);
                 options.addArguments("--headless");
                 options.addArguments("--disable-gpu");
+                options.addArguments("--disable-extensions");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--window-size=1100,600");
                 driver = new ChromeDriver(options);
 
                 break;
@@ -61,7 +75,8 @@ public class DriverManager {
                 driver = new ChromeDriver(optionz);
                 break;
             case INTERNETEXPLORER:
-                driver = new InternetExplorerDriver();
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
                 break;
         }
 

@@ -13,6 +13,7 @@ dataProvider\JsonDataReader.class
 managers\FileRead.class
 selenium\Wait.class
 pageObjects\CheckOutPage.class
+selenium\Helper.class
 testDataTypes\Customer.class
 dataProvider\LogFile.class
 managers\ExtentManager.class

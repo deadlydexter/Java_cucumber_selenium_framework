@@ -1,5 +1,6 @@
 package runner;
 
+//import com.cucumber.listener.Reporter;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -9,12 +10,12 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 		features = "src/test/resources",
 		glue = "stepDefinitions",
-		tags = "@Third",
-		monochrome = true,
+		tags = "@Run",
 		plugin =  {
-//				"html:target/cucumber-html-report/report.html"
-				"json:target/cucumber-reports/Cucumber.json"
-		},publish = true )
+//				"html:target/cucumber-html-report/report.html",
+				"json:target/cucumber-reports/Cucumber.json",
+				"pretty","summary","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+		} )
 public class TestRunner_Smokes {
 
 	@AfterClass

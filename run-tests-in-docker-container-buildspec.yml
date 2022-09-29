@@ -1,0 +1,60 @@
+version: 0.2
+#   Run this in Build Stage
+#   https://medium.com/@whaleberry/using-aws-codebuild-to-build-image-from-docker-file-on-bitbucket-to-ecr-e004a455dd83
+env:
+  variables:
+    ACCOUNTID: "account_id_from_aws_profile - 12chars"
+    REGION: "us-east-1"
+    REPO: "ecr-repo-name" #create one on console and give name here
+    IMAGE_TAG: "jc-tests-latest"
+    CONTAINER: "fargate-web-container"
+  secrets-manager:
+    login_pass_value: arn:aws:secretsmanager:us-east-1:ACCOUNTID:secret:secret-name-681ick:secert_key_for_password
+
+phases:
+  pre_build:
+    commands:
+      - aws --version
+      - REPOSITORY_URI=$ACCOUNTID.dkr.ecr.$REGION.amazonaws.com/$REPO
+      - echo Repo URI var is $REPOSITORY_URI
+  build:
+    commands:
+      - ASSUME_ROLE_ARN="arn:aws:iam::$ACCOUNTID:role/StandardPipelineRole"
+      - TEMP_ROLE=$(aws sts assume-role --role-arn $ASSUME_ROLE_ARN --role-session-name test)
+      - echo $CODEBUILD_SRC_DIR
+      - ls $CODEBUILD_SRC_DIR
+      - export TEMP_ROLE
+      - export AWS_ACCESS_KEY_ID=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.AccessKeyId')
+      - export AWS_SECRET_ACCESS_KEY=$(echo "${TEMP_ROLE}" | jq -re '.Credentials.SecretAccessKey')
+      - export AWS_SESSION_TOKEN=$(echo "${TEMP_ROLE}" | jq -re '.Credentials.SessionToken')
+      - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
+      - docker build -f Dockerfile -t dqf-tests-repo:latest .
+#      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - echo "Print PWD --> $(pwd)"
+      - docker run --name igt-jv-tests -v $(pwd)/results:/usr/src/app/igt-jv/target/cucumber-reports -e API_BASE_URL=$API_BASE_URL -e UI_BASE_URL=$UI_BASE_URL -e  IMAGE_PATH=$IMAGE_PATH -e CHROME_DRIVER_PATH=$CHROME_DRIVER_PATH -e PASSWORD=$login_pass_value dqf-tests-repo:latest /bin/bash -ec "mvn test -q"
+      - echo "Copy artifacts to S3 bucket"
+      - chmod -R 777 $(pwd)/results
+
+#     Push Image to ECR Registry
+
+#      - docker push $REPOSITORY_URI:$IMAGE_TAG
+#      - printf '[{"name":"igt-jv-container", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+#      - cat imagedefinitions.json
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - ls ./results
+      - aws s3 cp ./results s3://some-landing-dev1-us-east-1/username --recursive
+      - docker images
+      - echo Writing image definitions file....
+      - printf '[{"name":"igt-jv-container", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
+#    - '**/*'
+#    - base-directory: 'dist'
+reports:
+  Selenium:
+    file-format: CUCUMBERJSON
+    base-directory: ./results
+    files:
+      - Cucumber.json

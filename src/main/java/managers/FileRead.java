@@ -3,8 +3,8 @@ package managers;
 import java.io.File;
 
 public class FileRead {
-    public static void main(String[] args) {
-        File folder = new File("D:\\read pdf");
+    public static void list_all_files(String[] args) {
+        File folder = new File("<Path to folder containing files>");
         File[] listOfFiles = folder.listFiles();
 
         for (int i = 0; i < listOfFiles.length; i++) {

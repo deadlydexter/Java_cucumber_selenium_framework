@@ -1,6 +1,5 @@
 package pageObjects;
 
-import com.aventstack.extentreports.ExtentReports;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -14,7 +13,7 @@ public class BasePage {
     WebDriverWait wait;
     Actions action;
     Select select;
-    public ExtentReports extent;
+//    public ExtentReports extent;
     public BasePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);

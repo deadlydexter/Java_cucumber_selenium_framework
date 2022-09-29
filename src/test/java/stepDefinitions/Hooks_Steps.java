@@ -9,7 +9,6 @@ import dataProvider.LogFile;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import managers.ExtentTestManager;
 import pageObjects.HomePage;
 
 public class Hooks_Steps {
@@ -23,11 +22,9 @@ public class Hooks_Steps {
 	@Given("^this is the first step$")
 	public void This_Is_The_First_Step() throws InterruptedException {
 		System.out.println("This is the first step");
-		homePage = testContext.getPageObjectManager().getHomePage();
-		homePage.navigateTo_HomePage();
-		ExtentTestManager.startTestByName(scenario_name);
-		ExtentTestManager.getTestByName(scenario_name).info("Navigating to loginPage");
-		Thread.sleep(3000);
+//		ExtentTestManager.startTestByName(scenario_name);
+//		ExtentTestManager.getTestByName(scenario_name).info("Navigating to loginPage");
+
 	}
 
 	@When("^this is the second step$")
@@ -36,24 +33,27 @@ public class Hooks_Steps {
 	}
 
 	@Then("^this is the third step$")
-	public void This_Is_The_Third_Step(){
+	public void This_Is_The_Third_Step() throws InterruptedException {
 		System.out.println("This is the third step");
 	}
 
 	@Given("this is the first step one")
 	public void this_is_the_first_step_one() {
 		System.out.println("Running step one");
-		LogFile.info("this is a log");
+		LogFile.info("this is a log for step one");
+
 	}
 
 	@When("this is the second step two")
 	public void this_is_the_second_step_two() {
 		System.out.println("Running step two");
+		LogFile.info("this is a log for step 2");
 	}
 
 	@Then("this is the third step three")
 	public void this_is_the_third_step_three() {
 		System.out.println("Running step Three");
+		LogFile.info("this is a log for step 3");
 	}
 
 

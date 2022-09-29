@@ -1,7 +1,7 @@
 Feature: Automated End2End Tests
   Description: This feature tests E2E scenario of a shopping website
 
-  @UI
+  @UI @Third
   Scenario: user places an order by search an item
     Given user is on home page
     And choose to buy first item from search results

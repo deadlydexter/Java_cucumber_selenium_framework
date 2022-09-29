@@ -104,6 +104,17 @@ public class HomePageSteps {
 	}
 }
 
+
+		//		--------Attach screenshot after each step------------
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		byte[] source = ts.getScreenshotAs(OutputType.BYTES);
+
+		Scenario sce =  ScenarioContext.getScenario();
+		sce.attach(source,"image/png", "Navigate to Homepage");
+		
+		//		--------/Attach screenshot after each step-----------
+
+
 ```
 
 

@@ -13,14 +13,14 @@ public class LogFile {
     public static void startTestCase(String sTestCaseName) {
 
         Log.info("-------------------------------------------");
-        Log.info("------------------" + sTestCaseName + "-------------------------");
+        Log.info(sTestCaseName);
         Log.info("-------------------------------------------");
     }
 
     public static void endTestCase(String sTestCaseName) {
 
 
-        Log.info("------------------" + sTestCaseName + "-------------------------");
+        Log.info(sTestCaseName);
         Log.info("-------------------------------------------");
     }
 
